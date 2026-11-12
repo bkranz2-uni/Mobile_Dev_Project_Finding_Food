@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    HACCP product images (imgurl1) are served over plain http.
+    Cleartext traffic is allowed ONLY for haccp.or.kr; everything else stays https-only.
+-->
+<network-security-config>
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">haccp.or.kr</domain>
+    </domain-config>
+</network-security-config>
