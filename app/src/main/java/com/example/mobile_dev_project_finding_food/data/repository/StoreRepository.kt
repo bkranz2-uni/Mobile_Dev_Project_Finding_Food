@@ -7,6 +7,8 @@ import com.example.mobile_dev_project_finding_food.data.orNotFound
 import com.example.mobile_dev_project_finding_food.data.safeCall
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.postgrest.from
+import io.github.jan.supabase.postgrest.query.Columns
+import io.github.jan.supabase.postgrest.query.Order
 
 class StoreRepository(
     private val supabase: SupabaseClient = SupabaseProvider.client,
@@ -42,6 +44,24 @@ class StoreRepository(
             .select { filter { eq("kakao_place_id", kakaoPlaceId) } }
             .decodeSingleOrNull<Store>()
     }.orNotFound("Store")
+
+    /**
+     * Stores where a product has been seen (for the product detail screen).
+     *
+     * Same as this SQL:
+     *   select s.* from stores s
+     *   join product_stores ps on ps.store_id = s.id
+     *   where ps.report_number = :reportNumber
+     */
+    suspend fun getStoresForProduct(reportNumber: String): AppResult<List<Store>> = safeCall {
+        supabase.from(TABLE)
+            .select(Columns.raw("*, product_stores!inner(report_number)")) {
+                filter { eq("product_stores.report_number", reportNumber) }
+                order("name", Order.ASCENDING)
+                limit(MAX_STORES)
+            }
+            .decodeList<Store>()
+    }
 
     private companion object {
         const val TABLE = "stores"
