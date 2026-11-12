@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict R8VFrvMVA9jOehSODZFqC1RynhyMMyfClTvEA6526U6OlISyHYXfAcHVAf04bts
+\restrict 0cgL1eoAKHcdrEXfmg1zvRLRKoaf3ypdJptRKyZOVNKdfrAAW2PuJYjeJ4eN2XF
 
 -- Dumped from database version 17.11
 -- Dumped by pg_dump version 18.6
@@ -345,5 +345,5 @@ ALTER TABLE public.stores ENABLE ROW LEVEL SECURITY;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict R8VFrvMVA9jOehSODZFqC1RynhyMMyfClTvEA6526U6OlISyHYXfAcHVAf04bts
+\unrestrict 0cgL1eoAKHcdrEXfmg1zvRLRKoaf3ypdJptRKyZOVNKdfrAAW2PuJYjeJ4eN2XF
 
