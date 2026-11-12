@@ -4,6 +4,19 @@
 drop policy if exists "Innloggede kan legge til produkter" on public.products;
 drop policy if exists "Innloggede kan oppdatere produkter" on public.products;
 
+do $$
+begin
+    if exists (
+        select 1 from pg_policies
+        where schemaname = 'public' and tablename = 'products'
+          and policyname = 'Alle kan lese produkter'
+    ) then
+        alter policy "Alle kan lese produkter" on public.products
+            rename to "Anyone can read products";
+    end if;
+end
+$$;
+
 -- 2. Create the sign-up trigger only if it is missing.
 do $$
 begin
