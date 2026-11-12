@@ -7,8 +7,10 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.example.mobile_dev_project_finding_food.ui.debug.SupabaseDebugScreen
+import androidx.compose.ui.tooling.preview.Preview
 import com.example.mobile_dev_project_finding_food.ui.theme.Mobile_Dev_Project_Finding_FoodTheme
 
 class MainActivity : ComponentActivity() {
@@ -18,10 +20,28 @@ class MainActivity : ComponentActivity() {
         setContent {
             Mobile_Dev_Project_Finding_FoodTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    // Temporary: debug screen to verify Supabase. Replace with the map screen.
-                    SupabaseDebugScreen(modifier = Modifier.padding(innerPadding))
+                    Greeting(
+                        name = "Android",
+                        modifier = Modifier.padding(innerPadding)
+                    )
                 }
             }
         }
+    }
+}
+
+@Composable
+fun Greeting(name: String, modifier: Modifier = Modifier) {
+    Text(
+        text = "Hello $name!",
+        modifier = modifier
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun GreetingPreview() {
+    Mobile_Dev_Project_Finding_FoodTheme {
+        Greeting("Android")
     }
 }
