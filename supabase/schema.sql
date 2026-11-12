@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict 0cgL1eoAKHcdrEXfmg1zvRLRKoaf3ypdJptRKyZOVNKdfrAAW2PuJYjeJ4eN2XF
+\restrict yynCpqHiAG9r66hAWYFtwqV2Ow7KcrMrTMQc8RpxnwAUP0WSl5cRe5maI2tOBqq
 
 -- Dumped from database version 17.11
 -- Dumped by pg_dump version 18.6
@@ -255,13 +255,6 @@ ALTER TABLE ONLY public.profiles
 
 
 --
--- Name: products Alle kan lese produkter; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "Alle kan lese produkter" ON public.products FOR SELECT USING (true);
-
-
---
 -- Name: product_stores Anyone can read product stores; Type: POLICY; Schema: public; Owner: -
 --
 
@@ -269,24 +262,17 @@ CREATE POLICY "Anyone can read product stores" ON public.product_stores FOR SELE
 
 
 --
+-- Name: products Anyone can read products; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY "Anyone can read products" ON public.products FOR SELECT USING (true);
+
+
+--
 -- Name: stores Anyone can read stores; Type: POLICY; Schema: public; Owner: -
 --
 
 CREATE POLICY "Anyone can read stores" ON public.stores FOR SELECT TO authenticated, anon USING (true);
-
-
---
--- Name: products Innloggede kan legge til produkter; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "Innloggede kan legge til produkter" ON public.products FOR INSERT TO authenticated WITH CHECK (true);
-
-
---
--- Name: products Innloggede kan oppdatere produkter; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "Innloggede kan oppdatere produkter" ON public.products FOR UPDATE TO authenticated USING (true) WITH CHECK (true);
 
 
 --
@@ -345,5 +331,5 @@ ALTER TABLE public.stores ENABLE ROW LEVEL SECURITY;
 -- PostgreSQL database dump complete
 --
 
-\unrestrict 0cgL1eoAKHcdrEXfmg1zvRLRKoaf3ypdJptRKyZOVNKdfrAAW2PuJYjeJ4eN2XF
+\unrestrict yynCpqHiAG9r66hAWYFtwqV2Ow7KcrMrTMQc8RpxnwAUP0WSl5cRe5maI2tOBqq
 
