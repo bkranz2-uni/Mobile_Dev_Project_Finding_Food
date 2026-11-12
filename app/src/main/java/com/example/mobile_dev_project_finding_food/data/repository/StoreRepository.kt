@@ -45,14 +45,7 @@ class StoreRepository(
             .decodeSingleOrNull<Store>()
     }.orNotFound("Store")
 
-    /**
-     * Stores where a product has been seen (for the product detail screen).
-     *
-     * Same as this SQL:
-     *   select s.* from stores s
-     *   join product_stores ps on ps.store_id = s.id
-     *   where ps.report_number = :reportNumber
-     */
+    /** Stores where this product has been seen (product detail screen). */
     suspend fun getStoresForProduct(reportNumber: String): AppResult<List<Store>> = safeCall {
         supabase.from(TABLE)
             .select(Columns.raw("*, product_stores!inner(report_number)")) {
