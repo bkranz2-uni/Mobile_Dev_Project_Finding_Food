@@ -38,12 +38,12 @@ class ProductRepository(
                     if (vegetarian) eq("is_vegetarian", true)
                     if (glutenFree) eq("is_gluten_free", true)
                 }
-                order("product_name", Order.ASCENDING)
+                order("product_name_kr", Order.ASCENDING)
             }
             .decodeList<Product>()
     }
 
-    /** Case-insensitive name search (uses the pg_trgm index on product_name). */
+    /** Case-insensitive search in both the Korean and the English product name. */
     suspend fun searchProducts(query: String): AppResult<List<Product>> {
         val trimmed = query.trim()
         if (trimmed.isEmpty()) return AppResult.Success(emptyList())
@@ -51,7 +51,12 @@ class ProductRepository(
         return safeCall {
             supabase.from(TABLE)
                 .select {
-                    filter { ilike("product_name", "%$trimmed%") }
+                    filter {
+                        or {
+                            ilike("product_name_kr", "%$trimmed%")
+                            ilike("product_name_en", "%$trimmed%")
+                        }
+                    }
                     limit(MAX_SEARCH_RESULTS)
                 }
                 .decodeList<Product>()
