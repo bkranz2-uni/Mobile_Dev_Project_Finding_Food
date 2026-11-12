@@ -63,7 +63,6 @@ dependencies {
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.lifecycle.viewmodel.compose)
 
     // Supabase (Auth + Postgrest) with the Ktor Android engine
     implementation(platform(libs.supabase.bom))

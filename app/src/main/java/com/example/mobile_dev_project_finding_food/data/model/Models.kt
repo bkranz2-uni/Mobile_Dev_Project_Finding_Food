@@ -3,7 +3,7 @@ package com.example.mobile_dev_project_finding_food.data.model
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-// Data classes that match the Supabase tables (see supabase/schema.sql).
+// Data classes that match the Supabase tables.
 // Database columns are snake_case, Kotlin properties are camelCase.
 
 @Serializable
