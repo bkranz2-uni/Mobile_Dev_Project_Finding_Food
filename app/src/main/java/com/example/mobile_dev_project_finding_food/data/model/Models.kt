@@ -9,11 +9,13 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Product(
     @SerialName("report_number") val reportNumber: String,
-    @SerialName("product_name") val productName: String,
+    @SerialName("product_name_kr") val productNameKr: String,
+    @SerialName("product_name_en") val productNameEn: String? = null,
     @SerialName("product_kind") val productKind: String? = null,
     @SerialName("raw_materials") val rawMaterials: String? = null,
-    /** HACCP allergy text. The value "없음" means "none". */
-    val allergy: String? = null,
+    /** HACCP allergy text in Korean. The value "없음" means "none". */
+    @SerialName("allergy_kr") val allergyKr: String? = null,
+    @SerialName("allergy_en") val allergyEn: String? = null,
     val manufacturer: String? = null,
     /** HACCP image URL, usually http:// (allowed in network_security_config.xml). */
     @SerialName("image_url") val imageUrl: String? = null,
@@ -22,7 +24,15 @@ data class Product(
     @SerialName("is_gluten_free") val isGlutenFree: Boolean = false,
     @SerialName("created_at") val createdAt: String? = null,
     @SerialName("updated_at") val updatedAt: String? = null,
-)
+) {
+    /** Name to show in the UI: English if we have it, otherwise Korean. */
+    val displayName: String
+        get() = productNameEn?.takeIf { it.isNotBlank() } ?: productNameKr
+
+    /** Allergy text to show in the UI: English if we have it, otherwise Korean. */
+    val displayAllergy: String?
+        get() = allergyEn?.takeIf { it.isNotBlank() } ?: allergyKr
+}
 
 @Serializable
 data class Profile(
